@@ -7,18 +7,18 @@ class Sujet {
         this.observers.push(observer);
     }
 
-    removeObserver(observer) {
-        this.observers = this.observers.filter(obs => obs !== observer);
-    }
-
     notifierObservers(message) {
         this.observers.forEach(observer => observer.update(message));
     }
 }
 
 class Observer {
+    constructor(nom) {
+        this.nom = nom;
+    }
+
     update(message) {
-        console.log(`L'observateur a reçu le message : ${message}`);
+        console.log(`${this.nom} a reçu la notification : ${message}`);
     }
 }
 
@@ -29,25 +29,15 @@ class Youtube extends Sujet {
     }
 }
 
-class Abonne extends Observer {
-    constructor(nom) {
-        super();
-        this.nom = nom;
-    }
-
-    update(message) {
-        console.log(`{this.nom} a reçu la notification : ${message}`);
-    }
-}
 const maChaine = new Youtube();
-const abonne1 = new Abonne('Alice');
-const abonne2 = new Abonne('Bob');
+const abonne1 = new Observer('Mike');
+const abonne2 = new Observer('Féliciano');
 
 maChaine.addObserver(abonne1);
 maChaine.addObserver(abonne2);
 
 maChaine.publierNouvelleVideo('Design Patterns en JavaScript');
 
-const abonne3 = new Abonne('Charlie');
+const abonne3 = new Observer('Yahn');
 maChaine.addObserver(abonne3);
 maChaine.publierNouvelleVideo('Introduction à Observateur');
