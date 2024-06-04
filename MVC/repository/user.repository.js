@@ -1,7 +1,9 @@
 import User from '../models/user.model'
 import connection from '../config/database'
+import { Sequelize } from 'sequelize'
 
 User(connection, Sequelize);
-export const find = () => {
-// Requête qui faut return
-}
+
+const { User } = connection.models
+
+// RELATIONS
